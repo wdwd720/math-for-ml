@@ -13,32 +13,32 @@
 \]
 
 ## Goal
-Derive \(\nabla_w \ell\) and \(\partial \ell / \partial b\) later this week.
+Derive \(\nabla_w \ell\) and \(\partial \ell / \partial b\).
 
 ## Interpretation (what the model is doing)
 We compute a linear score:
-z = w · x + b
-- If z is large positive → class +1
-- If z is large negative → class −1
+z = w * x + b
+- If z is large positive -> class +1
+- If z is large negative -> class -1
 Decision boundary: z = 0
 
 Probabilistic view:
-P(y=+1 | x) = σ(z), σ(t)=1/(1+e^(−t))
-(We keep y ∈ {−1,+1} for cleaner algebra.)
+P(y=+1 | x) = sigma(z), sigma(t)=1/(1+e^(-t))
+(We keep y in {-1,+1} for cleaner algebra.)
 
 ## Margin viewpoint (AIME-style insight)
-Define margin m = y z = y(w·x + b)
+Define margin m = y z = y(w * x + b)
 - m >> 0: correct & confident
-- m ≈ 0: uncertain
+- m ~= 0: uncertain
 - m < 0: wrong
 Logistic loss as function of margin:
-ℓ(m)=log(1+exp(−m))
+ell(m)=log(1+exp(-m))
 Training tries to increase margin.
 
 ## Loss values (intuition check)
 Add a table:
 
-| margin m | loss ℓ(m) (approx) |
+| margin m | loss ell(m) (approx) |
 |---:|---:|
 | -3 | 3.048 |
 | -1 | 1.313 |
@@ -47,3 +47,44 @@ Add a table:
 |  3 | 0.049 |
 
 Large negative margins are penalized heavily, while large positive margins incur near-zero loss.
+
+## Full gradient derivation
+For one sample \((x, y)\), define:
+\[
+z = w \cdot x + b,\quad u = -y z,\quad \ell = \log(1+\exp(u)) = \operatorname{logaddexp}(0,u).
+\]
+
+First differentiate the outer function:
+\[
+\frac{d}{du}\log(1+\exp(u))
+= \frac{\exp(u)}{1+\exp(u)}
+= \sigma(u).
+\]
+
+Chain rule terms:
+\[
+\frac{\partial u}{\partial w} = -y x,\qquad \frac{\partial u}{\partial b} = -y.
+\]
+
+Therefore:
+\[
+\nabla_w \ell
+= \frac{d\ell}{du}\frac{\partial u}{\partial w}
+= \sigma(u)(-y x),
+\]
+\[
+\frac{\partial \ell}{\partial b}
+= \frac{d\ell}{du}\frac{\partial u}{\partial b}
+= \sigma(u)(-y).
+\]
+
+For a dataset \(\{(x_i, y_i)\}_{i=1}^n\), with
+\[
+L(w,b) = \frac{1}{n}\sum_{i=1}^{n}\ell_i,\qquad
+u_i = -y_i(w \cdot x_i + b),
+\]
+the averaged gradients are:
+\[
+\nabla_w L = \frac{1}{n}\sum_{i=1}^{n}\sigma(u_i)(-y_i x_i),\qquad
+\frac{\partial L}{\partial b} = \frac{1}{n}\sum_{i=1}^{n}\sigma(u_i)(-y_i).
+\]
