@@ -49,7 +49,7 @@ def gradcheck(loss_fn, params, eps=1e-5):
 
     base_params = _clone_params(params)
     base_loss, analytic_raw = _parse_loss_output(loss_fn(_clone_params(base_params)))
-    _ = base_loss  # Explicitly kept for readability/debugging.
+    _ = base_loss
 
     numeric = {}
     for key, param_arr in base_params.items():

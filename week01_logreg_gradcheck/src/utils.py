@@ -45,6 +45,5 @@ def sigmoid(t):
     exp_t = np.exp(t[neg])
     out[neg] = exp_t / (1.0 + exp_t)
 
-    # Keep outputs strictly inside (0, 1) for robust downstream checks.
     eps = np.finfo(float).eps
     return np.clip(out, eps, 1.0 - eps)

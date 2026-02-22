@@ -68,7 +68,7 @@ def save_decision_boundary(X, y, w, b, filename="decision_boundary.png"):
 def main():
     X, y = make_blobs(n=200, seed=1)
 
-    split = int(0.8 * X.shape[0])  # 160 train, 40 test for n=200
+    split = int(0.8 * X.shape[0])
     X_train, y_train = X[:split], y[:split]
     X_test, y_test = X[split:], y[split:]
 
