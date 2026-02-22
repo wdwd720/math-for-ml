@@ -1,15 +1,8 @@
 # Week 01 — Logistic Regression + Gradient Checking 
 
-This week I built a full “calculus → code → verification → experiment” pipeline for **binary classification** using **logistic regression** (labels are `{-1, +1}`).
+This week I wanted to understand logistic regression end-to-end, not just call a library. I generated a small synthetic 2D dataset (two Gaussian blobs labeled +1/−1), derived the gradients using the chain rule, implemented everything in NumPy, and then used finite-difference gradient checking to make sure my math matched my code.
 
-Steps:
-- start from the logistic loss (margin view)
-- derive gradients with the chain rule
-- implement everything from scratch (NumPy only)
-- **verify** gradients with finite-difference gradient checking
-- train with gradient descent and visualize the results
-
-This folder is a: derivation + code + tests + plots.
+My gradcheck max relative error was 3.587e−12 (so my gradients matched), and training dropped the loss from 0.693 → 0.0075 with 100% train/test accuracy on this simple synthetic dataset.
 
 ---
 
