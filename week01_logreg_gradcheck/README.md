@@ -22,6 +22,7 @@ python experiment.py
 ## Expected output today
 - Prints dataset shape and class counts
 - Saves `data_preview.png`
+- Running `python margin_plot.py` saves `loss_vs_margin.png`.
 
 ## Next steps (later this week)
 - Implement logistic regression loss and analytic gradients
