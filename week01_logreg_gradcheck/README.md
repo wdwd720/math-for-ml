@@ -1,4 +1,4 @@
-# Week 01 — Logistic Regression + Gradient Checking 
+# Week 1 — Logistic Regression + Gradient Checking 
 
 This week I wanted to understand logistic regression end-to-end, not just call a library. I generated a small synthetic 2D dataset (two Gaussian blobs labeled +1/−1), derived the gradients using the chain rule, implemented everything in NumPy, and then used finite-difference gradient checking to make sure my math matched my code.
 
