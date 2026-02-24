@@ -1,4 +1,4 @@
-"""Unit tests for logistic regression and gradient checking."""
+"""Tests for logistic regression math and gradcheck."""
 
 from __future__ import annotations
 

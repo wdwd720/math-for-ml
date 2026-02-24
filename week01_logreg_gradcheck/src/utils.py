@@ -1,4 +1,4 @@
-"""Utility functions for Week 01."""
+"""Small utility helpers for Week 1."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ import numpy as np
 
 
 def make_blobs(n: int = 200, seed: int = 1):
-    """Generate two Gaussian blobs for binary classification.
+    """Make a simple two-blob dataset for binary classification.
 
     Returns:
         X: Array of shape (n, 2)
@@ -34,7 +34,7 @@ def make_blobs(n: int = 200, seed: int = 1):
 
 
 def sigmoid(t):
-    """Numerically stable sigmoid for NumPy arrays."""
+    """Compute sigmoid with a numerically stable split."""
     t = np.asarray(t, dtype=float)
     out = np.empty_like(t, dtype=float)
 

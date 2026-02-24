@@ -1,4 +1,4 @@
-"""Finite-difference gradient checking utilities."""
+"""Utilities for numerical gradient checking."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ import numpy as np
 
 
 def _clone_params(params):
-    """Deep-copy params into float NumPy arrays (including scalars as 0-d arrays)."""
+    """Create float copies of parameter values."""
     cloned = {}
     for key, value in params.items():
         arr = np.asarray(value, dtype=float)
@@ -15,7 +15,7 @@ def _clone_params(params):
 
 
 def _parse_loss_output(output):
-    """Parse either loss scalar or (loss, grads_dict) output."""
+    """Handle either loss-only or (loss, grads) output."""
     if isinstance(output, tuple):
         if len(output) != 2:
             raise ValueError("loss_fn tuple output must be (loss, grads_dict).")
@@ -27,20 +27,11 @@ def _parse_loss_output(output):
 
 
 def gradcheck(loss_fn, params, eps=1e-5):
-    """Central difference gradient check for params dict.
+    """Compare analytic gradients to central-difference gradients.
 
-    Args:
-        loss_fn: Callable with signature loss_fn(params).
-            May return scalar loss OR (loss, grads_dict).
-        params: Dict of parameter arrays/scalars.
-        eps: Central-difference step size.
-
-    Returns:
-        Dictionary with keys:
-          - "analytic": dict of analytic grads (or empty dict if unavailable)
-          - "numeric": dict of numeric grads
-          - "rel_error": dict of relative error arrays (or empty dict if unavailable)
-          - "max_rel_error": float
+    loss_fn(params) can return either:
+    1) loss (float), or
+    2) (loss, grads_dict)
     """
     if eps <= 0:
         raise ValueError("eps must be positive.")

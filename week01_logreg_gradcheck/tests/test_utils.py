@@ -1,4 +1,4 @@
-"""Unit tests for Week 01 utility helpers."""
+"""Tests for Week 1 utility helpers."""
 
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-"""Logistic regression loss, gradients, and prediction helpers."""
+"""Core logistic regression functions for Week 1."""
 
 from __future__ import annotations
 
@@ -8,7 +8,7 @@ from src.utils import sigmoid
 
 
 def _validate_inputs(w, b, X, y):
-    """Validate and normalize logistic-regression inputs."""
+    """Run shape checks and normalize input arrays."""
     X = np.asarray(X, dtype=float)
     w = np.asarray(w, dtype=float)
     y = np.asarray(y, dtype=float)
@@ -34,7 +34,7 @@ def _validate_inputs(w, b, X, y):
 
 
 def loss_and_grads(w, b, X, y):
-    """Return (loss, grad_w, grad_b) for logistic loss with y in {-1, +1}."""
+    """Return mean logistic loss and analytic gradients."""
     w, b, X, y = _validate_inputs(w=w, b=b, X=X, y=y)
 
     z = X @ w + b
@@ -50,7 +50,7 @@ def loss_and_grads(w, b, X, y):
 
 
 def predict(w, b, X):
-    """Predict labels in {-1, +1} from linear score sign."""
+    """Predict -1/+1 labels from the score sign."""
     X = np.asarray(X, dtype=float)
     w = np.asarray(w, dtype=float)
 

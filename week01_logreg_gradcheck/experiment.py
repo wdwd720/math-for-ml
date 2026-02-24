@@ -1,4 +1,4 @@
-"""Week 1 experiment: gradcheck, training, and plots for logistic regression."""
+"""Week 1 run script: gradcheck, training, and plots."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from src.utils import make_blobs
 
 
 def train_logreg(X_train, y_train, lr=0.1, steps=1000):
-    """Run gradient descent and return learned parameters plus loss history."""
+    """Train logistic regression with plain gradient descent."""
     n_features = X_train.shape[1]
     w = np.zeros(n_features, dtype=float)
     b = 0.0
@@ -31,7 +31,7 @@ def train_logreg(X_train, y_train, lr=0.1, steps=1000):
 
 
 def save_loss_curve(loss_history, filename="loss_curve.png"):
-    """Save loss-vs-step plot."""
+    """Save the training loss curve."""
     plt.figure()
     plt.plot(np.arange(loss_history.size), loss_history)
     plt.xlabel("step")
@@ -42,7 +42,7 @@ def save_loss_curve(loss_history, filename="loss_curve.png"):
 
 
 def save_decision_boundary(X, y, w, b, filename="decision_boundary.png"):
-    """Save scatter plot with learned linear decision boundary."""
+    """Save a scatter plot with the learned decision boundary."""
     plt.figure()
     plt.scatter(X[y == 1, 0], X[y == 1, 1], marker="o")
     plt.scatter(X[y == -1, 0], X[y == -1, 1], marker="x")

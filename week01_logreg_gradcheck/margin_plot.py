@@ -1,4 +1,4 @@
-"""Plot logistic loss as a function of margin."""
+"""Quick plot of logistic loss versus margin."""
 
 from __future__ import annotations
 
