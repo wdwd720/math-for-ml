@@ -8,9 +8,9 @@
 - $y \in \{-1, +1\}$
 
 ## Logistic loss
-$$
+```math
 \ell(w,b;x,y) = \log\left(1 + \exp(-y z)\right)
-$$
+```
 
 ## Goal
 Derive $\nabla_w \ell$ and $\partial \ell / \partial b$.
@@ -50,41 +50,41 @@ Large negative margins are penalized heavily, while large positive margins incur
 
 ## Full gradient derivation
 For one sample $(x, y)$, define:
-$$
-z = w \cdot x + b,\quad u = -y z,\quad \ell = \log(1+\exp(u)) = \operatorname{logaddexp}(0,u).
-$$
+```math
+z = w \cdot x + b,\quad u = -y z,\quad \ell = \log(1+\exp(u)) = \mathrm{logaddexp}(0,u).
+```
 
 First differentiate the outer function:
-$$
+```math
 \frac{d}{du}\log(1+\exp(u))
 = \frac{\exp(u)}{1+\exp(u)}
 = \sigma(u).
-$$
+```
 
 Chain rule terms:
-$$
+```math
 \frac{\partial u}{\partial w} = -y x,\qquad \frac{\partial u}{\partial b} = -y.
-$$
+```
 
 Therefore:
-$$
+```math
 \nabla_w \ell
 = \frac{d\ell}{du}\frac{\partial u}{\partial w}
 = \sigma(u)(-y x),
-$$
-$$
+```
+```math
 \frac{\partial \ell}{\partial b}
 = \frac{d\ell}{du}\frac{\partial u}{\partial b}
 = \sigma(u)(-y).
-$$
+```
 
 For a dataset $\{(x_i, y_i)\}_{i=1}^n$, with
-$$
+```math
 L(w,b) = \frac{1}{n}\sum_{i=1}^{n}\ell_i,\qquad
 u_i = -y_i(w \cdot x_i + b),
-$$
+```
 the averaged gradients are:
-$$
+```math
 \nabla_w L = \frac{1}{n}\sum_{i=1}^{n}\sigma(u_i)(-y_i x_i),\qquad
 \frac{\partial L}{\partial b} = \frac{1}{n}\sum_{i=1}^{n}\sigma(u_i)(-y_i).
-$$
+```
